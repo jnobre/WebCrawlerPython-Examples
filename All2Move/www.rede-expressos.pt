@@ -1,0 +1,462 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Language" content="pt"/>
+<meta name="Description" content="REDE EXPRESSOS | Viajar em Portugal para 300 destinos - Compra online de bilhetes; Horários e Preços online - Website e aplicação móvel myRNE | Travel in Portugal with Rede Expressos coaches - Online tickets available; Check Timetables and Prices - Website and mobile app myRNE."/>
+<title>---Rede Nacional de Expressos---</title>
+<link href="/CSS/styles.css" type="text/css" rel="stylesheet" />
+<script language="javascript" type="text/javascript" charset="ISO-8859-1" src="common/langMsg.js"></script>
+<script language="javascript" type="text/javascript" charset="ISO-8859-1" src="common/browserdetect.js"></script>
+<script language="javascript" type="text/javascript" charset="ISO-8859-1" src="/common/formfunctions.js"> </script>
+
+   
+<!--SLIDESHOW-->
+<link rel="stylesheet" href="CSS/slideshow.css"/>
+<script src="jscripts/jquery.min.js"></script>
+<script src="jscripts/jquery.easing.1.3.js"></script>
+<script src="jscripts/slides.min.jquery.js"></script>
+
+<!--Animação Natal - tempestade neve-->
+<script language="javascript" type="text/javascript" charset="ISO-8859-1" src="/jscripts/snowstorm.js"> </script>
+
+<script>
+	$(function(){
+		$('#slides').slides({
+			preload: true,
+			preloadImage: 'img/loader.gif',
+			play: 5000,
+			pause: 2500,
+			hoverPause: true,
+			effect: 'fade'
+		});
+	});
+</script>
+<!-- END SLIDESHOW-->
+    
+<script language="javascript" type="text/javascript">
+
+var actTopMenu = 0;
+var actLeftMenu = 0;
+var initMenu = 100;
+
+function menuTopDeactivate(){
+    if (actTopMenu!=0){
+        var aux = actTopMenu;
+        actTopMenu=0;
+        menuChangeFont(aux, 'off');
+    }
+}
+
+function menuLeftDeactivate(){
+    if (actLeftMenu!=0){
+        var aux = actLeftMenu;
+        actLeftMenu=0;
+        menuChangeImg(aux, 'off');
+    }
+}
+
+function menuTopActivate(num) {
+    var oldMenu = actTopMenu;
+    
+    menuLeftDeactivate();
+    menuChangeFont(num, 'on');
+    actTopMenu = num;
+
+    if ( oldMenu!=0) {
+        if ( oldMenu < 100) {
+            menuChangeImg(oldMenu, 'off');
+        }
+        else  {    
+            menuLeftDeactivate();
+            menuChangeFont(oldMenu, 'off');
+        }
+    }
+}
+
+function menuActivate(num) {
+    var oldMenu = actLeftMenu;
+
+    menuTopDeactivate();
+    menuChangeImg(num, 'on');
+    actLeftMenu = num;
+
+    if ( oldMenu!=0 ) {
+        if ( oldMenu < 100) {
+            menuTopDeactivate();
+            menuChangeImg(oldMenu, 'off');
+        }
+        else  {    
+            menuChangeFont(oldMenu, 'off');
+        }    
+    }
+}
+
+function menuChangeFont(num, fontType) {
+    if ( num == actTopMenu )
+        return;
+    
+    var vAux = 'amenu' + num;
+    var vClass = '';
+    
+    if ( fontType == 'on' )
+        vClass = 'link_menu_topoON';
+    else
+        vClass = 'link_menu_topo';
+      
+    fraMenu = document.getElementById(vAux);
+    fraMenu.className = vClass;  
+}
+
+function menuChangeImg(num, imgType) {
+    if ( num == actLeftMenu )
+        return;
+    
+    var vAux = 'tdmenu' + num;
+    var vImg = '';
+    
+    if ( imgType == 'on' )
+        vImg = 'img/bt_menu_selec.jpg';
+    else
+        vImg = 'img/bt_menu.jpg';
+    
+    fraMenu = document.getElementById(vAux);
+    fraMenu.background = vImg;
+}
+
+function resizeMe( doTop, extraHeight ){
+      
+    var s = fraContent.location.href;
+
+    var fraObj = document.getElementById('fraContent');
+    var docHeight = 213;
+
+    if (s.indexOf("error.aspx") >= 0)
+        docHeight = 213;
+    else if (s.indexOf("RFLEXOnMaintenance.aspx") >= 0)
+        docHeight = 213;
+    else {
+        //try to get appropriate height :s
+        try {
+            docHeight = fraContent.document.body.children[0].scrollHeight;
+
+            if (docHeight < 200)
+                docHeight = fraContent.document.body.scrollHeight;
+        } 
+        catch (e) {
+            docHeight = fraContent.document.body.scrollHeight;
+        }
+
+        if(extraHeight !== undefined)
+            docHeight += extraHeight;
+    }
+    
+    fraObj.style.height = (docHeight) + 'px';
+
+    //alert(docHeight);    
+    
+    doTop = ''+ doTop + ''
+    if (isEmpty(doTop))
+        doTop = '1';
+   
+    if (doTop != '0' )
+        window.scroll(0, 0);
+}
+
+
+
+function showHeadNormal() {
+    var vSrc = self.fraHeaderTabs.location.href + '';
+    if ( vSrc.indexOf('HeaderAlt-IN.aspx') != -1 )
+    self.fraHeaderTabs.location.href = 'BilheteiraHead-IN.aspx';
+}
+function showHeadAlt() {
+    var vSrc = self.fraHeaderTabs.location.href + '';
+    if ( vSrc.indexOf('HeaderAlt-IN.aspx') == -1 )
+        self.fraHeaderTabs.location.href = 'HeaderAlt-IN.aspx';
+}
+
+
+function openMenu(menuName, menuNum, url) { 
+//alert('name: ' + menuName + '\nnum: ' + menuNum + '\nurl: ' + url);
+
+    switch(menuName) {
+/*
+        case 'home':
+          break;    
+        case 'empresa':
+          break;
+        case 'condicoes':
+          break;
+        case 'contactos':
+          break;
+        case 'info':
+          break;
+        case 'pos':
+          break;
+        case 'transport':
+          break;
+        case 'news':
+          break;
+        case 'promos':
+          break;
+*/
+        case 'horarios':
+            showHeadAlt();
+            break;
+        case 'bilhetes':
+            showHeadAlt();
+            break;
+        default:
+            showHeadNormal();
+            break;
+    }
+        
+    if ( menuNum < 100 ) {
+    // menu left
+        menuActivate (menuNum);
+    }
+    else {
+    // menu top
+        menuTopActivate (menuNum);
+    }
+    
+    self.fraContent.location.href = url;
+} 
+
+
+function pedidoRFLEX() {
+    self.fraContent.location.href = "RFLEXpedido.aspx";    
+}
+
+function descontoOnline() {
+    self.fraContent.location.href = "desconto.aspx";    
+}
+
+function descontoJovem() {
+    self.fraContent.location.href = "descontoJovem.aspx";    
+}
+
+function wifiInfo() {
+    self.fraContent.location.href = "wifiinfo.aspx";    
+}
+/*
+function swTMN() {
+    self.fraContent.location.href = "swTMN.aspx";    
+    showHeadAlt();
+}
+*/
+function showMyRNE() {
+    self.fraContent.location.href = "myRNE.aspx";    
+}
+
+
+
+
+
+
+function showURLBlank(url) {
+    window.open(url);
+}
+
+function showURLTop(url) {
+    top.location.href = url;
+}
+
+function showURLFrame(url) {
+    self.fraContent.location.href = url;
+}
+
+function showURLPop(url, pars) {
+    window.open(url,'w',pars);
+}
+
+
+
+
+
+
+function setLang(codLang) {
+    if(!confirm(getMsg(  codLang, 'check_langnew')))
+        return;
+    
+    var fObj = document.frmDados;
+    fObj.actionObject.value = 'fo';
+    fObj.actionName.value = 'setlang';
+    fObj.codLang.value = codLang;
+    fObj.submit();
+}
+
+
+function getQS(testname) {
+    //get querystring value ('' if not found)
+    var name = new String();
+    name = testname;
+    name = name.toLowerCase();
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href.toLowerCase());
+    if (results == null)
+        return "";
+    else
+        return results[1];
+}
+
+
+
+function hideAdDiv() {
+    setElemDisplay('divBlocker', 'none');
+    setElemDisplay('divAd', 'none');   
+}
+
+
+function showDespachos() {
+    setElemDisplay('tdCallCenter', 'none');
+    setElemDisplay('tdDespachos', 'block');   
+}
+function hideDespachos() {
+    setElemDisplay('tdCallCenter', 'block');
+    setElemDisplay('tdDespachos', 'none');   
+}
+
+
+function popPrivacy() { 
+	window.open('popPrivacy.aspx','privacy','width=600,height=500,scrollbars=yes');
+}
+
+
+function startStuff() {
+
+/*
+    // show pub instead of tickets if swTMN
+    var vSrc = self.fraContent.location.href + '';
+    if ( vSrc.indexOf('swTMN.aspx') > 0 )
+        showHeadAlt();
+        */
+
+    doMobiStuff();
+    //alert(navigator.userAgent);
+
+}
+
+function getViewportHeight() {
+    var h = 0;
+    if(self.innerHeight)
+        h = window.innerHeight;
+    else if(document.documentElement && document.documentElement.clientHeight)
+        h = document.documentElement.clientHeight;
+    else if(document.body)
+        h = document.body.clientHeight;
+        
+    return h;
+} 
+
+
+function showMobiDiv(idDiv) {
+    var height = document.body.scrollHeight;
+    if(height > 0) {
+        height=height+100;
+        document.getElementById("divBlocker").style.height = height + "px";
+    }
+    setElemDisplay('divBlocker', 'block');
+    setElemDisplay(idDiv, 'block');
+}
+
+function hideMobiDiv(idDiv) {
+    setElemDisplay('divBlocker', 'none');
+    setElemDisplay(idDiv, 'none');
+}
+
+
+function hideMobiAll() {
+    setElemDisplay('divBlocker', 'none');
+    setElemDisplay('divMobiIPadIPhone', 'none');
+    setElemDisplay('divMobiAndroid', 'none');
+}
+
+
+function doMobiStuff() {
+
+    if (isBrowserIPadIPhone()){
+        showMobiDiv('divMobiIPadIPhone');
+    } 
+    else if (isBrowserAndroid()) {
+        showMobiDiv('divMobiAndroid');
+    }
+}
+
+
+
+function showContentBlock() {
+    window.scroll(0,0);
+
+    var dObj = document.getElementById('divBlock2');
+    if (!dObj)
+        return;
+
+    var fraObj = document.getElementById('fraContent');
+    if (!fraObj)
+        return;
+
+    var rect = fraObj.getBoundingClientRect();
+    if (!rect)
+        return;
+
+    var h = fraContent.document.body.scrollHeight; // + 600;
+    dObj.style.top = (rect.top -2) + 'px';
+    dObj.style.left = (rect.left -2) + 'px'; 
+
+    dObj.style.height= h + 'px';
+    dObj.style.display = 'block'; 
+}
+
+function hideContentBlock() {
+    setElemDisplay('divBlock2', 'none');    
+}
+
+
+</script>
+
+</head>
+<body onload="javascript:startStuff()" style="margin: 0; padding: 0; text-align:center; height:100%">
+<form name="frmDados" id="frmDados" method="post" target="fraEngine" action="Engine.aspx">
+<input type="hidden" name="actionObject" value="fo" />
+<input type="hidden" name="actionName" value="" />
+<input type="hidden" name="codLang" value="" />
+<input type="hidden" name="curLang" value="pt" />
+
+
+<?xml version="1.0" encoding="utf-16"?><!DOCTYPE div PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><div><map name="MapIPadIPhone"><area shape="rect" coords="467,-8,611,106" href="javascript:hideMobiDiv('divMobiIPadIPhone')" border="1" alt="fechar"></area><area shape="rect" href="myRNE/default.aspx" coords="150,334,600,534" target="_top" border="1" alt="download"></area></map><map name="MapAndroid"><area shape="rect" coords="467,-8,611,106" href="javascript:hideMobiDiv('divMobiAndroid')" border="1" alt="fechar"></area><area shape="rect" href="myRNE/default.aspx" coords="150,334,600,534" target="_top" border="1" alt="download"></area></map><div id="divMobiIPadIPhone" style="z-index:100;position:absolute;top:40px;width:600px;height:534px;left:50%;margin-left:-300px;display:none;"><img width="600" height="534" border="0" usemap="#MapIPadIPhone" src="img/myRNE/popUpiPhone.png"></img><div style="position:absolute;top:160px;left:250px;width:300px;height:180px;font-size:13px;font-family:Verdana,Geneva,sans-serif;text-align:left;overflow:hidden">Está a aceder ao website da Rede Expressos através de um iPhone/iPad.<p/> 
+            Quer fazer o download da aplicação gratuita myRNE?<br/></div></div><div id="divMobiAndroid" style="z-index:100;position:absolute;top:40px;width:600px;height:534px;left:50%;margin-left:-300px;display:none;"><img width="600" height="534" border="0" usemap="#MapAndroid" src="img/myRNE/popUpAndroid.png"></img><div style="position:absolute;top:160px;left:250px;width:300px;height:180px;font-size:13px;font-family:Verdana,Geneva,sans-serif;text-align:left;overflow:hidden">Está a aceder ao website da Rede Expressos através de um Android.<p/> 
+            Quer fazer o download da aplicação gratuita myRNE?</div></div><map name="MapLogo"><area shape="rect" coords="1,0,252,57" href="/default.aspx" alt="web-site da Rede Nacional de Expressos"></area><area shape="rect" coords="257,49,274,59" href="javascript:setLang('en')" alt="English"></area><area shape="rect" coords="282,49,300,59" href="javascript:setLang('fr')" alt="Français"></area></map><center><table width="770" border="0" cellspacing="0" cellpadding="0"><tr><td height="60" colspan="2"><table width="770" border="0" cellspacing="0" cellpadding="0"><tr><td width="320" height="62" rowspan="2" cellpadding="1"><img width="320" height="62" style="cursor:hand;" border="0" usemap="#MapLogo" src="img/xmas2014_rne_logo_topo2014_pt.jpg"></img></td><td height="49" colspan="14" valign="top"><iframe name="fraLogin" id="fraLogin" src="login-IN.aspx" width="100%" height="100%" frameborder="0" scrolling="no"><!-- .. --></iframe></td></tr><tr><td><table width="450" border="0" cellspacing="0" cellpadding="0"><tr><td nowrap="nowrap" align="center"><a class="link_menu_topo" name="amenu101" id="amenu101" href="javascript:openMenu('empresa',101,'empresa.aspx');">A Empresa</a></td><td width="10"></td><td width="2" class="v11b">|</td><td width="10"></td><td nowrap="nowrap" align="center"><a class="link_menu_topo" name="amenu102" id="amenu102" href="javascript:openMenu('condicoes',102,'condicoes.aspx');">Condições</a></td><td width="10"></td><td width="2" class="v11b">|</td><td width="10"></td><td nowrap="nowrap" align="center"><a class="link_menu_topo" name="amenu103" id="amenu103" href="javascript:openMenu('faq',103,'faq.aspx');">Perguntas Frequentes</a></td><td width="10"></td><td width="2" class="v11b">|</td><td width="10"></td><td nowrap="nowrap" align="center"><a class="link_menu_topo" name="amenu104" id="amenu104" href="javascript:openMenu('contactos',104,'contactos.aspx');">Contactos</a></td><td width="10"></td></tr></table></td></tr></table></td></tr></table><table width="770" border="0" cellspacing="0" cellpadding="0"><tr><td colspan="2" height="8" valign="top"><img src="img/fundo_banner_topo.jpg" width="226" height="8" /></td><td width="544" height="8" colspan="3" valign="top"><img src="img/fundo_banner_topo_esq.jpg" width="544" height="8" /></td></tr><tr><td width="6" height="222"><img src="img/fundo_banner_dir.jpg" width="6" height="222" /></td><td width="220" height="222" valign="top"><iframe name="fraHeaderTabs" id="fraHeaderTabs" src="BilheteiraHead-IN.aspx?" style="width:100%;height:100%;" frameborder="0" scrolling="no"><!--* * *--></iframe></td><td width="4"></td><td width="532" height="222" valign="top"><div id="container"><div id="example"><div id="slides"><div class="slides_container"><div><img width="540" height="220" border="0" src="img/slideshow/Banner540x220_MBWay.jpg" alt="MBWay disponível" onclick="javascript:showURLFrame('MBWayInfo.aspx')" style="cursor:hand"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/Banner540x220_MBpt.jpg" alt="Multibanco disponível"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/banner_surfspots.jpg" alt="Surf Spots" onclick="javascript:showURLFrame('promos.aspx')" style="cursor:hand"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/compraantecipada.jpg" alt="REFLEX 3D" onclick="javascript:showURLFrame('rflex3d.aspx')" style="cursor:hand"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/BannerConnectedBusPT.jpg" alt="Viaje com a Rede Expressos a ver Televisão" onclick="javascript:window.open('http://www.connectedbus.pt/rne', '_blank')" style="cursor:hand"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/ShuttleAeroporto_Banner RNE_540x220.jpg" alt="Shuttle Aeroporto" onclick="javascript:window.open('http://www.transdev.pt/aeroportoporto/ ', '_blank')" style="cursor:hand"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/RflexPlus_540x220_20140221.jpg" alt="RFLEX Plus" onclick="javascript:showURLPop('popRFLEXplus.html','width=600,height=510,scrollbars=yes')" style="cursor:hand"></img></div><div><img width="540" height="220" border="0" src="img/slideshow/DescontosJovem20140328_pt.jpg" alt="Descontos" onclick="javascript:descontoJovem()" style="cursor:hand"></img></div></div></div></div></div></td><td width="8" height="222" align="right" valign="top"><img src="img/fundo_banner_esq.jpg" width="6" height="222" /></td></tr><tr><td height="8" colspan="2"><img src="img/fundo_banner_fundo.jpg" width="226" height="8" /></td><td width="544" height="8" colspan="3" valign="top"><img src="img/fundo_banner_fundo_esq.jpg" width="544" height="8" /></td></tr></table><table width="770" border="0" cellspacing="0" cellpadding="0"><tr><td height="5" colspan="2"></td></tr><tr><td width="160" valign="top" style="width:160px"><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu1" id="tdmenu1" title="Faça aqui a compra online de bilhetes" onclick="javascript:openMenu('bilhetes',1,'Bilheteira1.aspx');">
+    
+     Bilhetes RFLEX</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu2" id="tdmenu2" title="Consulte os nossos horários e preços" onclick="javascript:openMenu('horarios',2,'horarios.aspx');">
+    
+     Horários e Preços</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu3" id="tdmenu3" title="Veja aqui tudo sobre o cartão RFLEX!" onclick="javascript:openMenu('rflex',3,'rflexinfo.aspx');">
+    
+     Cartão RFLEX</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu4" id="tdmenu4" title="Consulte as instruções de acesso aos nossos serviços via SMS e outras informações úteis" onclick="javascript:openMenu('info',4,'info.aspx');">
+    
+     Informações</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu5" id="tdmenu5" title="Consulte a lista de perguntas frequentes efectuadas sobre os nossos serviços" onclick="javascript:openMenu('faq',5,'faq.aspx');">
+    
+     Perguntas<br/>&#160;Frequentes</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu6" id="tdmenu6" title="Consulte a lista de postos de venda da Rede Nacional de Expressos por localidade" onclick="javascript:openMenu('pos',6,'PointsOfSale.aspx');">
+    
+     Postos de Venda</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu7" id="tdmenu7" title="Consulte a nossa tabela de preços de despachos de mercadorias" onclick="javascript:openMenu('transport',7,'TransportPrices.aspx');">
+    
+     Mercadorias</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu8" id="tdmenu8" title="Veja aqui as notícias Rede Expressos" onclick="javascript:openMenu('noticias',8,'noticias.aspx');">
+    
+     Notícias</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu9" id="tdmenu9" title="Aceda à nossa lista de links para web-sites que lhe poderão ser úteis" onclick="javascript:openMenu('links',9,'links.aspx');">
+    
+     Links Úteis</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td height="32" background="img/bt_menu.jpg" class="menuesq" name="tdmenu10" id="tdmenu10" title="mobile myRNE" onclick="javascript:openMenu('myrne',10,'myRNE.aspx');">
+    
+     mobile myRNE</td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr id="tdPaypal" style="display:block"><td height="55" class="menuesq"><a href="paypalInfo.aspx" target="fraContent"><img height="56" width="155" border="0" src="img/pag/bt_paypalMenu.png" alt="Pague aqui com PayPal"></img></a></td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr id="tdCallCenter" style="display:block"><td name="tdmenu11" id="tdmenu11" height="32" onclick="openMenu('faq',6,'faq.aspx');" style="cursor:hand;" class="menuesq"><img height="69" width="154" border="0" src="img/informacoesSummer2014.gif" alt="Serviço Informativo RNE: 707 22 33 44.&#xA;&#xD;Horário: todos os dias das 8h às 22h."></img></td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr id="tdDespachos" style="display:none"><td height="150"><img height="150" width="154" border="0" src="img/despachos.gif" alt="Horário Despachos"></img></td><td width="6"></td></tr><tr><td height="4"></td><td width="6"></td></tr><tr><td><a href="https://twitter.com/RedeExpressos" class="twitter-follow-button" data-show-count="false" data-lang="pt">@RedeExpressos</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></td><td width="6"></td></tr><tr><td height="6"></td><td width="6"></td></tr></table></td><td width="610" valign="top" height="*"><iframe name="fraContent" id="fraContent" width="610" frameborder="0" scrolling="no" style="height:250px;" onload="javascript:resizeMe(1);" src="home.aspx?"><!-- .. --></iframe></td></tr><tr><td height="0" colspan="2"><iframe name="fraEngine" id="fraEngine" src="Engine.aspx" width="100%" height="0" frameborder="0" scrolling="auto"><!-- .. --></iframe></td></tr><tr><td height="25" colspan="2" align="center" valign="bottom" class="ac10r"><a class="link_ac11r" href="javascript:popPrivacy()">Política de privacidade</a>      
+      |
+      © 2015 - Rede Expressos |  
+    Todos os direitos reservados</td></tr></table></center><div id="divBlock2" style="z-index:90;opacity:0.7;filter:alpha(opacity=70);position:absolute;left:0%;top:0%;width:610px;background-color:gray;display:none;"><center><img width="80" height="80" style="margin-top:100px" src="img/loading.gif" alt="Aguarde por favor..."></img></center></div></div>
+
+<div onclick="javascript:hideMobiAll()" id="divBlocker" style="z-index:90;opacity:0.7;filter:alpha(opacity=70);position:absolute;width:100%;height:100%;left: 0%;top: 0%;right:0%; bottom:0%;background-color:gray;display:none;">
+</div>
+
+</form>
+</body>
+</html>
